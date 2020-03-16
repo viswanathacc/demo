@@ -1,9 +1,0 @@
-   _     _     _     _
-  / \   / \   / \   / \
- ( P ) ( P ) ( E ) ( S )
-  \_/   \_/   \_/   \_/
-Application Name: ${spring.application.name}
-Application Port: ${server.port}
-Application Server: ${server.name}
-${AnsiColor.RED} :: Spring Boot${spring-boot.formatted-version} :: ${AnsiColor.RED}
-${AnsiColor.DEFAULT}

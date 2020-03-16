@@ -4,14 +4,11 @@ import com.example.demo.DemoApplication;
 import com.example.demo.model.Book;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -22,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ContextConfiguration(classes = {DemoApplication.class})
+@ActiveProfiles
 public class SpringBootBootstrapLiveIT {
 
     private static final String API_ROOT
@@ -29,6 +27,7 @@ public class SpringBootBootstrapLiveIT {
 
     private Book createRandomBook() {
         Book book = new Book();
+        book.setId(Long.parseLong(randomNumeric(5)));
         book.setTitle(randomAlphabetic(10));
         book.setAuthor(randomAlphabetic(15));
         return book;
@@ -37,21 +36,22 @@ public class SpringBootBootstrapLiveIT {
     private String createBookAsUri(Book book) {
         Response response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
                 .body(book)
                 .post(API_ROOT);
         return API_ROOT + "/" + response.jsonPath().get("id");
     }
 
-    @Before
+   /* @Before
     public void setup() {
         RestAssured.authentication = RestAssured.preemptive().basic("user", "password");
-    }
+    }*/
 
     @Test
     public void whenInvalidBook_thenError() {
         Book book = createRandomBook();
         book.setAuthor(null);
-        Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(book)
+        Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(book).accept(MediaType.APPLICATION_JSON_VALUE)
                 .post(API_ROOT);
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode());

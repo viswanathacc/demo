@@ -14,19 +14,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /* with out basic auth
+         //with out basic auth
         http.authorizeRequests()
                 .anyRequest()
                 .permitAll()
-                .and().csrf().disable();*/
+                .and().csrf().disable();
         // with basic auth
-        http.authorizeRequests()
+        /*http.authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic().and().csrf().disable().headers().frameOptions().disable();
+                .httpBasic().and().csrf().disable().headers().frameOptions().disable();*/
     }
-
+/*
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder encoder =
@@ -39,5 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                 .password(encoder.encode("admin"))
                 .roles("USER", "ADMIN");
-    }
+    }*/
+
+    /*@Bean
+    CommandLineRunner initDatabase(BookRepository repository) {
+        return args -> {
+            repository.save(new Book("A Guide to the Bodhisattva Way of Life", "Santideva", new BigDecimal("15.41")));
+            repository.save(new Book("The Life-Changing Magic of Tidying Up", "Marie Kondo", new BigDecimal("9.69")));
+            repository.save(new Book("Refactoring: Improving the Design of Existing Code", "Martin Fowler", new BigDecimal("47.99")));
+        };
+    }*/
 }
