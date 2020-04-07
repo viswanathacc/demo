@@ -17,3 +17,7 @@ starter on the class path and extend WebSecurityConfigurerAdapter for custom sec
 @RestController
 # 8. Error handling
 @ControllerAdvice
+
+# 9. How to run the build and test
+To build and execute unit tests --> mvn clean install
+To build and execute integration tests --> mvn clean verify -Pit
