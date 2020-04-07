@@ -43,6 +43,10 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
@@ -83,7 +87,6 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>2.2.5.RELEASE</version>
                         <executions>
                             <execution>
                                 <id>pre-integration-test</id>
@@ -91,66 +94,30 @@
                                     <goal>start</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>
-                                        <argument>--server.port=${jetty.http.port}</argument>
-                                    </arguments>
+                                    <profiles>
+                                        <profile>dev</profile>
+                                    </profiles>
                                 </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <!--<profiles>
-        <profile>
-            <id>failsafe</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    &lt;!&ndash; jetty plugin config&ndash;&gt;
-                    <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
-                        <version>9.4.27.v20200227</version>
-                        <configuration>
-                            <httpConnector>
-                                <port>8082</port>
-                            </httpConnector>
-                            <stopKey>quit</stopKey>
-                            <stopPort>9000</stopPort>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>start-jetty</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>start</goal>
-                                </goals>
+                                <!--<configuration>
+                                    <arguments>
+                                        <argument>&#45;&#45;server.port=${jetty.http.port}</argument>
+                                    </arguments>
+                                </configuration>-->
                             </execution>
                             <execution>
-                                <id>stop-jetty</id>
-                                <phase>post-integration-test</phase>
+                                <id>post-integration-test</id>
                                 <goals>
                                     <goal>stop</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
-    </profiles>-->
+    </profiles>
 </project>

@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

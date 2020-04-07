@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.it;
 
 import com.example.demo.DemoApplication;
 import com.example.demo.model.Book;
@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ContextConfiguration(classes = {DemoApplication.class})
-@ActiveProfiles
 public class SpringBootBootstrapLiveIT {
 
     private static final String API_ROOT

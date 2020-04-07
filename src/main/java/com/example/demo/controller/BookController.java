@@ -4,6 +4,8 @@ import com.example.demo.error.BookNotFoundException;
 import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,7 @@ public class BookController {
         this.bookRepository = repository;
     }
 
+    @Cacheable("find_all")
     @GetMapping
     public Iterable findAll() {
         return bookRepository.findAll();
@@ -39,6 +42,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CacheEvict(value = "find_all")
     public Book create(@RequestBody Book book) {
         return bookRepository.save(book);
     }

@@ -4,7 +4,7 @@ server:
   port: 8082
 spring:
   application:
-    name: Bootstrap Spring Boot DEFAULT
+    name: Bootstrap Spring Boot in dev
   banner:
     location: classpath:my-banner.txt
   datasource:
@@ -16,9 +16,6 @@ spring:
     console:
       enabled: true
       path: /h2
-      settings:
-        web-allow-others: false
-        trace: true
   output:
     ansi:
       enabled: always
@@ -34,12 +31,10 @@ spring:
 # log level
 
 logging:
-  file: logs/application-debug.log
   pattern:
     console: "%d %-5level %logger : %msg%n"
-    file: "%d %-5level [%thread] %logger : %msg%n"
   level:
     org.springframework.test: ERROR
     com.example.demo: INFO
     org.hibernate: INFO
-    org.apache.http: INFO
+    org.apache.http.wire: INFO

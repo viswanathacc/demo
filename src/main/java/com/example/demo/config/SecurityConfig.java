@@ -18,7 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .anyRequest()
                 .permitAll()
-                .and().csrf().disable();
+                .and().csrf().disable()
+        .headers().frameOptions().disable();
         // with basic auth
         /*http.authorizeRequests()
                 .anyRequest()
